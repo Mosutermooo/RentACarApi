@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AllRentsResponseParams(
-    val success: Boolean,
-    val message: String,
+    val success: Boolean? = null,
+    val message: String? = null,
     val price: Int?,
     val rentTime: Long?,
     val rentId: Long?,
     val car: Car?,
-    val user: User?
+    val user: User? = null
         )

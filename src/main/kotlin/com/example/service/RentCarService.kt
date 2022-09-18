@@ -1,8 +1,10 @@
 package com.example.service
 
 import com.example.db.Database
+import com.example.models.Rent
 import com.example.models.RentCarRequestParams
 import com.example.models.RentCarResponseParams
+import com.example.models.RentsResponseParams
 
 interface RentCarService {
 

@@ -2,10 +2,7 @@ package com.example.service
 
 import com.example.db.entities.CarTable
 import com.example.db.entities.RentTable
-import com.example.models.Car
-import com.example.models.CarResponse
-import com.example.models.RentCarRequestParams
-import com.example.models.RentCarResponseParams
+import com.example.models.*
 import com.example.use_cases.CheckUserRole
 import com.example.utils.Constants
 import com.example.utils.JobSchedulerManager
@@ -225,6 +222,8 @@ class RentCarServiceImpl : RentCarService{
 
         return status
     }
+
+
 
 
 }

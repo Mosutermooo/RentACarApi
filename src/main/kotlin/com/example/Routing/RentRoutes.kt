@@ -35,6 +35,7 @@ fun Application.rentRoutes(repository: RentCarRepository){
                     val result = repository.changeCarPrice(carId, price, userId)
                     call.respond(result)
                 }
+
             }
 
         }

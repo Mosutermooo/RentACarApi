@@ -3,6 +3,7 @@ package com.example.repository
 import com.example.models.Car
 import com.example.models.CarResponse
 import com.example.models.InsertCarRequestParams
+import com.example.models.RentsResponseParams
 import com.example.service.*
 
 class CarsRepositoryImpl : CarsRepository {
@@ -29,6 +30,14 @@ class CarsRepositoryImpl : CarsRepository {
 
     override suspend fun getCarByType(type: String): List<Car> {
         return carService.getCarByType(type)
+    }
+
+    override suspend fun getUserRents(userId: String?): RentsResponseParams {
+        return carService.getUserRents(userId)
+    }
+
+    override suspend fun getAllRents(): RentsResponseParams {
+        return carService.getAllRents()
     }
 
 

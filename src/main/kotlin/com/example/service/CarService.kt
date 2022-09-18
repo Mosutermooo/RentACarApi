@@ -14,5 +14,8 @@ interface CarService {
     suspend fun getCars() : CarResponse
     suspend fun getCarImages(carId: Int): List<CarImage>
     suspend fun getCarByType(type: String): List<Car>
+    suspend fun getUserRents(userId: String?): RentsResponseParams
+
+    suspend fun getAllRents(): RentsResponseParams
 
 }

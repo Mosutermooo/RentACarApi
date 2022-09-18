@@ -2,6 +2,7 @@ package com.example.service
 
 import com.example.db.entities.CarImagesEntity
 import com.example.db.entities.CarTable
+import com.example.db.entities.RentTable
 import com.example.db.entities.UserTable
 import com.example.models.*
 import com.example.use_cases.CheckUserRole
@@ -251,6 +252,117 @@ class CarServiceImpl : CarService {
                 )
             }
     }
+
+
+    override suspend fun getUserRents(userId: String?): RentsResponseParams {
+        userId ?: return RentsResponseParams(false, "Please enter a valid userId")
+
+        val rents = dbConnection.from(RentTable).select()
+            .where{
+                RentTable.userId eq userId
+            }.map {
+                val carId = it[RentTable.carId]!!
+                val userIdFromDb = it[RentTable.userId]
+                val rentId = it[RentTable.rentId]!!
+                val rentTime = it[RentTable.rentTime]!!
+                val price = it[RentTable.price]!!
+
+                AllRentsResponseParams(
+                   price = price,
+                   rentTime = rentTime,
+                   rentId = rentId,
+                   car =  getCarById(carId),
+                )
+
+            }
+
+        return RentsResponseParams(
+            true,
+            "rents",
+            rents
+        )
+
+    }
+
+    override suspend fun getAllRents(): RentsResponseParams {
+
+
+
+        val rents = dbConnection.from(RentTable).select().map {
+                val carId = it[RentTable.carId]!!
+                val userIdFromDb = it[RentTable.userId]!!
+                val rentId = it[RentTable.rentId]!!
+                val rentTime = it[RentTable.rentTime]!!
+                val price = it[RentTable.price]!!
+
+                AllRentsResponseParams(
+                    price = price,
+                    rentTime = rentTime,
+                    rentId = rentId,
+                    car =  getCarById(carId),
+                    user = getUserById(userIdFromDb)
+                )
+            }
+        return RentsResponseParams(
+            true,
+            "all rents",
+            rents
+        )
+    }
+
+    private suspend fun getUserById(userId: String): User?{
+        val user = dbConnection.from(UserTable).select()
+            .where {
+                UserTable.userId eq userId
+            }.map {
+                val userId = it[UserTable.userId]!!
+                val username = it[UserTable.username]!!
+                val email = it[UserTable.email]!!
+                val userPassword = it[UserTable.password]!!
+                val name = it[UserTable.name]!!
+                val lastname = it[UserTable.lastname]!!
+                val createdAt = it[UserTable.createdAt]!!
+                val role = it[UserTable.role]!!
+                User(
+                    userId,
+                    name,
+                    lastname,
+                    email,
+                    username,
+                    createdAt,
+                    userPassword,
+                    role
+                )
+
+            }.firstOrNull()
+
+        return user
+
+
+    }
+    private suspend fun getCarById(carId: Int): Car?{
+        return dbConnection.from(CarTable).select()
+            .where {
+                CarTable.id eq carId
+            }.map {
+                val id = it[CarTable.id]!!
+                val carBrand = it[CarTable.car_Brand]!!
+                val carModel = it[CarTable.car_Model]!!
+                val carType = it[CarTable.car_Type]!!
+                val totalPrice = it[CarTable.total_price]!!
+                val status = it[CarTable.status]!!
+                Car(
+                    id,
+                    carBrand,
+                    carModel,
+                    carType,
+                    totalPrice,
+                    status,
+                    getCarImages(id)
+                )
+            }.singleOrNull()
+    }
+
 
 
 }
