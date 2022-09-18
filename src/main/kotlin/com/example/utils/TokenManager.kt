@@ -13,7 +13,7 @@ class TokenManager(private val config: HoconApplicationConfig) {
     private val audience = config.property("audience").getString()
     private val secret = config.property("secret").getString()
     private val issuer = config.property("issuer").getString()
-    private val expirationDate = System.currentTimeMillis() + 60000
+    private val expirationDate = System.currentTimeMillis() + 600000
     private val currentTimeInMillis = System.currentTimeMillis()
 
     fun generateJWTToken(params: LoginParams): String? {
@@ -21,7 +21,7 @@ class TokenManager(private val config: HoconApplicationConfig) {
             .withIssuer(issuer)
             .withClaim("username", params.username)
             .withClaim("password", params.password)
-            .withExpiresAt(Date(expirationDate))
+            //.withExpiresAt(Date(expirationDate))
             .sign(Algorithm.HMAC256(secret))
     }
 

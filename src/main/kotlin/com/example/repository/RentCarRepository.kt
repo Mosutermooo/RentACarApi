@@ -7,5 +7,6 @@ interface RentCarRepository {
     suspend fun rentACar(params: RentCarRequestParams): RentCarResponseParams
     suspend fun changeCarStatus(carId: Int?, status: String?): RentCarResponseParams
     suspend fun changeCarPrice(carId: Int?, price: Int?, userId: String?): RentCarResponseParams
+    suspend fun getCarStatus(carId: Int?) : String
 
 }

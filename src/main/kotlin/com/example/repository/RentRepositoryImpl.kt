@@ -36,4 +36,8 @@ class RentRepositoryImpl : RentCarRepository {
             )
         }
     }
+
+    override suspend fun getCarStatus(carId: Int?): String {
+        return rentService.getCarStatus(carId)
+    }
 }

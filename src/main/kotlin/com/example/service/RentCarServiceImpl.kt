@@ -213,5 +213,18 @@ class RentCarServiceImpl : RentCarService{
 
     }
 
+    override suspend fun getCarStatus(carId: Int?): String {
+        carId ?: return "Please enter a valid carId"
+
+        val status = dbConnection.from(CarTable).select()
+            .where {
+                CarTable.id eq carId
+            }.map {
+                it[CarTable.status]
+            }.singleOrNull() ?: return "The car doesn't have status"
+
+        return status
+    }
+
 
 }

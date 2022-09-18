@@ -15,5 +15,6 @@ interface RentCarService {
     suspend fun changeCarStatus(carId: Int, status: String): RentCarResponseParams
     suspend fun changeCarPrice(carId: Int, price: Int, userId: String): RentCarResponseParams
     fun updateCarStatus(carId: Int?, updateIn: Long)
+    suspend fun getCarStatus(carId: Int?) : String
 
 }

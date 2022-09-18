@@ -17,6 +17,11 @@ fun Application.rentRoutes(repository: RentCarRepository){
                     val result = repository.rentACar(params)
                     call.respond(result)
                 }
+                get("/carStatus"){
+                    val carId = call.request.queryParameters["carId"]?.toIntOrNull()
+                    val result = repository.getCarStatus(carId)
+                    call.respond(result)
+                }
                 put ("/changeCarStatus"){
                     val carId = call.request.queryParameters["carId"]?.toIntOrNull()
                     val status = call.request.queryParameters["status"]

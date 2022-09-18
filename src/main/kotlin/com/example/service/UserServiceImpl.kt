@@ -72,7 +72,7 @@ class UserServiceImpl : UserService {
                 false,
                 "Password doesnt match with our password in the database, try again",
                 null,
-                null
+                null,
             )
         }
 
@@ -81,7 +81,8 @@ class UserServiceImpl : UserService {
             true,
             "Logged in successfully",
             token,
-            user.userId
+            user.userId,
+            user.role
         )
 
 
