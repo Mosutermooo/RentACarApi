@@ -286,8 +286,6 @@ class CarServiceImpl : CarService {
 
     override suspend fun getAllRents(): RentsResponseParams {
 
-
-
         val rents = dbConnection.from(RentTable).select().map {
                 val carId = it[RentTable.carId]!!
                 val userIdFromDb = it[RentTable.userId]!!
@@ -308,6 +306,41 @@ class CarServiceImpl : CarService {
             "all rents",
             rents
         )
+    }
+
+    override suspend fun getRentsByRentId(rentId: Long?): RentsResponseParams {
+        rentId ?: return  RentsResponseParams(
+            false,
+            "Please enter a valid rentId"
+        )
+
+        val rent = dbConnection.from(RentTable).select()
+            .where{
+                rentId eq RentTable.rentId
+            }.map {
+                val carId = it[RentTable.carId]!!
+                val userIdFromDb = it[RentTable.userId]!!
+                val rentId = it[RentTable.rentId]!!
+                val rentTime = it[RentTable.rentTime]!!
+                val price = it[RentTable.price]!!
+
+                AllRentsResponseParams(
+                    price = price,
+                    rentTime = rentTime,
+                    rentId = rentId,
+                    car =  getCarById(carId),
+                    user = getUserById(userIdFromDb)
+                )
+            }
+
+        return RentsResponseParams(
+            true,
+            "rent $rentId",
+            rent
+        )
+
+
+
     }
 
     private suspend fun getUserById(userId: String): User?{

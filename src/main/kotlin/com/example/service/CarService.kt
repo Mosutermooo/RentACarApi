@@ -17,5 +17,6 @@ interface CarService {
     suspend fun getUserRents(userId: String?): RentsResponseParams
 
     suspend fun getAllRents(): RentsResponseParams
+    suspend fun getRentsByRentId(rentId: Long?): RentsResponseParams
 
 }

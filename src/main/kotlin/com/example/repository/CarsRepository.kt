@@ -13,4 +13,5 @@ interface CarsRepository {
     suspend fun getCarByType(type: String): List<Car>
     suspend fun getUserRents(userId: String?): RentsResponseParams
     suspend fun getAllRents(): RentsResponseParams
+    suspend fun getRentsByRentId(rentId: Long?): RentsResponseParams
 }

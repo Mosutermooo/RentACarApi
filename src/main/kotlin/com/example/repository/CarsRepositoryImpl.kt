@@ -40,5 +40,9 @@ class CarsRepositoryImpl : CarsRepository {
         return carService.getAllRents()
     }
 
+    override suspend fun getRentsByRentId(rentId: Long?): RentsResponseParams {
+        return carService.getRentsByRentId(rentId)
+    }
+
 
 }

@@ -34,6 +34,11 @@ fun Application.carRoutes(repository: CarsRepository) {
                    val result = repository.getAllRents()
                    call.respond(result)
                }
+               get("/rents/rentByRentId/{rentId}"){
+                   val rentId = call.parameters["rentId"]?.toLongOrNull()
+                   val result = repository.getRentsByRentId(rentId)
+                   call.respond(result)
+               }
 
            }
            get("/allCars"){
