@@ -8,4 +8,7 @@ interface UserRepository {
     suspend fun refreshToken(token: String): RefreshTokenResponse
     suspend fun getUserData(userId: String?): UserResponseParams
     suspend fun changeUserData(params: ChangeUserNameAndLastnameRequestParams): UserResponseParams
+
+    suspend fun getAllLocations(): LocationModelResponseParams
+    suspend fun getSingleLocation(id: Int?): LocationModelResponseParams
 }

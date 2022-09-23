@@ -10,5 +10,7 @@ data class Car(
     val car_Type: String,
     val totalPrice: Int,
     val status: String,
-    val carImage: List<CarImage>
+    val carImage: List<CarImage>,
+    val lat: String,
+    val lng: String
 )

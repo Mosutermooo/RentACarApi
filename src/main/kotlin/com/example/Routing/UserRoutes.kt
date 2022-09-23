@@ -22,6 +22,16 @@ fun Application.userRoutes(userRepo: UserRepository){
                     val result = userRepo.changeUserData(params)
                     call.respond(result)
                 }
+
+            }
+            get("/location/{id}"){
+                val locationId = call.parameters["id"]?.toIntOrNull()
+                val result = userRepo.getSingleLocation(id = locationId)
+                call.respond(result)
+            }
+            get("/locations"){
+                val result = userRepo.getAllLocations()
+                call.respond(result)
             }
 
         }

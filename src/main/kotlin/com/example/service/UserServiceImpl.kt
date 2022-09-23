@@ -1,5 +1,6 @@
 package com.example.service
 
+import com.example.db.entities.LocationsTable
 import com.example.db.entities.UserTable
 import com.example.models.*
 import com.example.utils.TokenManager
@@ -195,6 +196,60 @@ class UserServiceImpl : UserService {
                 false,
                 "Something went wrong updating data, try again",
                 null
+            )
+        }
+    }
+
+    override suspend fun getAllLocations(): LocationModelResponseParams {
+        val locations = dbConnection.from(LocationsTable).select()
+            .map {
+                val id = it[LocationsTable.id]!!
+                val lat = it[LocationsTable.lat]!!
+                val lng = it[LocationsTable.lng]!!
+                val locationName = it[LocationsTable.location_name]!!
+                val city = it[LocationsTable.city]!!
+                LocationsModel(
+                    id,
+                    lat,
+                    lng,
+                    locationName,
+                    city
+                )
+            }
+        return LocationModelResponseParams(
+            true,
+            "Locations",
+            locations
+        )
+    }
+
+    override suspend fun getSingleLocation(id: Int?): LocationModelResponseParams {
+        val location = dbConnection.from(LocationsTable).select()
+            .map {
+                val id = it[LocationsTable.id]!!
+                val lat = it[LocationsTable.lat]!!
+                val lng = it[LocationsTable.lng]!!
+                val locationName = it[LocationsTable.location_name]!!
+                val city = it[LocationsTable.city]!!
+                LocationsModel(
+                    id,
+                    lat,
+                    lng,
+                    locationName,
+                    city
+                )
+            }.singleOrNull()
+        return if(location != null){
+            LocationModelResponseParams(
+                true,
+                "Locations",
+                location = location
+            )
+        }else{
+            LocationModelResponseParams(
+                false,
+                "The location does not exist",
+                location = location
             )
         }
     }

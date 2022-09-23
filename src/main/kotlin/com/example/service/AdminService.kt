@@ -8,7 +8,7 @@ interface AdminService {
     val dbConnection: org.ktorm.database.Database
         get() = Database.connect()
 
-    suspend fun allRents(userId: String?) : AllRentsResponseParams
-    suspend fun getCarImages(carId: Int): List<CarImage>
+    suspend fun addALocation(params: LocationModelRequestParams): LocationModelResponseParams
+
 
 }

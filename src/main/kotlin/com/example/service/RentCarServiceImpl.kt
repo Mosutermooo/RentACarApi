@@ -111,6 +111,8 @@ class RentCarServiceImpl : RentCarService{
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val status = it[CarTable.status]!!
+                   val lat = it[CarTable.lat]!!
+                   val lng = it[CarTable.lng]!!
                 Car(
                     id,
                     carBrand,
@@ -118,7 +120,7 @@ class RentCarServiceImpl : RentCarService{
                     carType,
                     totalPrice,
                     status,
-                    emptyList()
+                    emptyList(),lat, lng
                 )
             }.singleOrNull() ?: return RentCarResponseParams(
                 false,
@@ -169,6 +171,8 @@ class RentCarServiceImpl : RentCarService{
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val status = it[CarTable.status]!!
+                val lat = it[CarTable.lat]!!
+                val lng = it[CarTable.lng]!!
                 Car(
                     id,
                     carBrand,
@@ -176,7 +180,8 @@ class RentCarServiceImpl : RentCarService{
                     carType,
                     totalPrice,
                     status,
-                    emptyList()
+                    emptyList(),
+                    lat, lng
                 )
             }.singleOrNull() ?: return RentCarResponseParams(
             false,

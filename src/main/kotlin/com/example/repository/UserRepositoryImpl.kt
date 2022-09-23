@@ -44,4 +44,12 @@ class UserRepositoryImpl : UserRepository {
     override suspend fun changeUserData(params: ChangeUserNameAndLastnameRequestParams): UserResponseParams {
         return userService.changeUserData(params)
     }
+
+    override suspend fun getAllLocations(): LocationModelResponseParams {
+        return userService.getAllLocations()
+    }
+
+    override suspend fun getSingleLocation(id: Int?): LocationModelResponseParams {
+        return userService.getSingleLocation(id)
+    }
 }

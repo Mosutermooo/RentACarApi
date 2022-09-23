@@ -12,5 +12,7 @@ object CarTable : Table<Nothing>("cars") {
     val car_Type  = varchar("car_Type")
     val total_price = int("total_price")
     val status = varchar("status")
+    val lat = varchar("lat")
+    val lng = varchar("lng")
 
 }

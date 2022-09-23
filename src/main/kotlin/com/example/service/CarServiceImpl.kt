@@ -38,6 +38,8 @@ class CarServiceImpl : CarService {
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val status = it[CarTable.status]!!
+                val lat = it[CarTable.lat]!!
+                val lng = it[CarTable.lng]!!
                 Car(
                     id,
                     carBrand,
@@ -45,7 +47,8 @@ class CarServiceImpl : CarService {
                     carType,
                     totalPrice,
                     status,
-                    emptyList()
+                    emptyList(),
+                    lat, lng
                 )
             }.singleOrNull()
 
@@ -149,7 +152,8 @@ class CarServiceImpl : CarService {
                     val carType = it[CarTable.car_Type]!!
                     val totalPrice = it[CarTable.total_price]!!
                     val carStatus = it[CarTable.status]!!
-
+                    val lat = it[CarTable.lat]!!
+                    val lng = it[CarTable.lng]!!
                     Car(
                         id,
                         carBrand,
@@ -157,7 +161,8 @@ class CarServiceImpl : CarService {
                         carType,
                         totalPrice,
                         carStatus,
-                        getCarImages(id)
+                        getCarImages(id),
+                        lat, lng
                     )
                 }
 
@@ -194,6 +199,8 @@ class CarServiceImpl : CarService {
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val carStatus = it[CarTable.status]!!
+                val lat = it[CarTable.lat].toString()
+                val lng = it[CarTable.lng].toString()
 
                 Car(
                     id,
@@ -202,7 +209,9 @@ class CarServiceImpl : CarService {
                     carType,
                     totalPrice,
                     carStatus,
-                    getCarImages(id)
+                    getCarImages(id),
+                    lat,
+                    lng
                 )
             }
 
@@ -240,6 +249,8 @@ class CarServiceImpl : CarService {
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val carStatus = it[CarTable.status]!!
+                val lat = it[CarTable.lat]!!
+                val lng = it[CarTable.lng]!!
 
                 Car(
                     id,
@@ -248,7 +259,8 @@ class CarServiceImpl : CarService {
                     carType,
                     totalPrice,
                     carStatus,
-                    getCarImages(id)
+                    getCarImages(id),
+                    lat, lng
                 )
             }
     }
@@ -384,6 +396,8 @@ class CarServiceImpl : CarService {
                 val carType = it[CarTable.car_Type]!!
                 val totalPrice = it[CarTable.total_price]!!
                 val status = it[CarTable.status]!!
+                val lat = it[CarTable.lat]!!
+                val lng = it[CarTable.lng]!!
                 Car(
                     id,
                     carBrand,
@@ -391,7 +405,10 @@ class CarServiceImpl : CarService {
                     carType,
                     totalPrice,
                     status,
-                    getCarImages(id)
+                    getCarImages(id),
+                    lat,
+                    lng
+
                 )
             }.singleOrNull()
     }
